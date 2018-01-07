@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+Hey there! My name is Srinath. I'm from Mumbai and am currently residing in Rochester, New York.
+I'm a computer engineer, pursuing a Master's degree in Computer Science at the Rochester Institute of Technology.  
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[ossrinath@gmail.com](mailto:ossrinath@gmail.com)
