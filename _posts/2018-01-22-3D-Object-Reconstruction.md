@@ -64,7 +64,7 @@ To capture the object from every angle, I placed a turntable on a flat surface w
 ![The turntable](https://raw.githubusercontent.com/srinathos/srinathos.github.io/master/res/3DReconstruction/images/turntable.jpg)
 *The turntable*
 
-![Turntable angles](https://raw.githubusercontent.com/srinathos/3srinathos.github.io/master/res/3DReconstruction/images/turntable_angles.gif)
+![Turntable angles](https://raw.githubusercontent.com/srinathos/srinathos.github.io/master/res/3DReconstruction/images/turntable_angles.gif)
 
 *Turntable angles*
 
