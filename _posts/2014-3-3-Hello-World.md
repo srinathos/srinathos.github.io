@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 3D Object reconstruction
+title: 3D Object reconstruction using Depth Sensors
 ---
 
 ## Introduction
