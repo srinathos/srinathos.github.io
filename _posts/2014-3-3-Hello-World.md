@@ -102,7 +102,7 @@ While I did try many objects with the setup, I'm going to discuss three main can
 ![Box](https://raw.githubusercontent.com/srinathos/3D-Object-Reconstruction/master/res/images/box.png)
 
 * The house was a more complex object. While it did have many corners, the complex geometry could be hard to reproduce.
-![House](https://raw.githubusercontent.com/srinathos/3D-Object-Reconstruction/master/res/images/house.png)
+![House](https://raw.githubusercontent.com/srinathos/3D-Object-Reconstruction/master/res/images/house.jpg)
 
 ### Rubik's cube
 As you can see, the structure of the rubik's cube has been maintained really well. There are certain places where outliers are still visible. While the ICP algorithm has been able to stitch the point clouds quite effectively, there are places where there are misalignments. This is because of the approximation from the algorithm. As future work, some sub-sampling can be done for overlapping areas to improve overall quality. 
