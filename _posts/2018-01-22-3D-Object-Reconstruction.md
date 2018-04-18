@@ -80,6 +80,7 @@ The OpenNI middleware and primesense drivers help in identifying and communicati
 Any sensor is susceptible to some noise from the environment. While the depth sensor accurately obtains the depth from the scene, we can observe some noise around the objects. I used the Statistical Outlier Removal method to remove these points. While the result was not all that great, it was better than the initial input.
 
 ![Image stitched without any cleaning, notice how the point clouds were misaligned](https://raw.githubusercontent.com/srinathos/srinathos.github.io/master/res/3DReconstruction/images/house.gif)
+
 *Image stitched without any cleaning, notice how the point clouds were misaligned*
 
 For some reason that I haven't figured out yet, my cloud points were being visualised upside down. A possible fix I came across was to use a negative Y value to flip the axis using setCameraPosition while using the PCLVisualizer, but for now, I worked with it as it is. 
