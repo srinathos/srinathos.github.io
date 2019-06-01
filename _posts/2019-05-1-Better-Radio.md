@@ -6,8 +6,8 @@ title: Making radio interesting again
 Music has always been extremely satisfying to listen to. 
 My father’s audio cassette collection introduced me to classic hits from Queen, Bruce Springsteen and Billy Joel along with a few Sanskrit strotams. 
 Radio was quick to takeover after I ran through the collection. But along with these songs came advertisements. 
-Some were witty and the rest were annoying. For a regular listener, the witty ones got annoying too. 
-I soon moved to MP3s and then to streaming music. After I had purchased my first car, I decided to give radio a listen. 
+Some were witty and most were annoying. For a regular listener, the witty ones soon get annoying. 
+I soon moved to MP3s and then to streaming music. After I had purchased my first car, I decided to give radio a listen again. 
 The advertisements were still there, and I found myself skipping through stations for most of the drive. 
 14 years had gone by and almost nothing had changed. Except, that over the last decade, machine learning has become more accessible than it ever was. 
 Could we use machine learning to classify an audio sample as either an advertisement or music? Definitely. 
@@ -62,7 +62,7 @@ The data is split into a ratio of 70 – 30 for training and testing respectivel
 ## Results and possible improvements
 
 For an MLP with 100 hidden units (single layer), the model achieves an accuracy of 91.7%. 
-Increasing the number layers of 2 bumps up the accuracy to [93.25% with an f1-score of 0.94](https://github.com/srinathos/slightlyBetterRadio/blob/mlp_classifier/reports/mlp_classifier). 
+Increasing the number layers of 2 bumps up the accuracy to [93.25% with an f1-score of 0.93](https://github.com/srinathos/slightlyBetterRadio/blob/mlp_classifier/reports/mlp_classifier). 
 Not bad at all!  
 Remember that this is only using the MFCC for the audio sample and with the default parameters for the MLP and the MFCC library. 
 I expect the performance of the model to improve if the following are explored:
@@ -73,5 +73,3 @@ I expect the performance of the model to improve if the following are explored:
 
 For those who would like to pursue this further, you can find all the related code on my [github repository](https://github.com/srinathos/slightlyBetterRadio). 
 The repository readme has more information, but feel free to contact me for more information.
-
-
