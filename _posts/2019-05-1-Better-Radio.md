@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Making radio interesting again
+date: 2019-05-1
 ---
 
 Music has always been extremely satisfying to listen to. 

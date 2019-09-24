@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 3D Object reconstruction using Depth Sensors
+date: 2018-01-22
 ---
 
 ## Introduction
