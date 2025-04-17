@@ -57,8 +57,9 @@ permalink: /:title/
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
-
+timezone: America/New_York
 # Jekyll 3 now only supports Kramdown for Markdown
+markdown: kramdown
 kramdown:
   # Use GitHub flavored markdown, including triple backtick fenced code blocks
   input: GFM
@@ -69,13 +70,40 @@ kramdown:
     css_class: 'highlight'
 
 # Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
+sass: { style: expanded } # You might prefer to minify using :compressed
 
-# Use the following plug-ins
-gems:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+#plugins
+plugins:                       # modern key name
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-picture-tag         # responsive <picture> tag
+  - jekyll-paginate-v2         # optional nicer pagination
+
+# ---------- Picture‑tag defaults ----------
+picture:
+  source: assets/images
+  output: assets/generated
+  presets:
+    default:
+      widths: [400, 800, 1200, 1600]
+      formats: [avif, webp, jpg]
+      sizes: "(min-width: 40em) 50vw, 100vw"
+
+# ---------- Collections ----------
+collections:
+  albums:
+    output: true
+    permalink: /albums/:name/
+
+# ---------- Defaults (optional) ----------
+defaults:
+  - scope: { path: "", type: posts }
+    values:
+      layout: post
+      author: srinath
+  - scope: { path: "", type: albums }
+    values:
+      layout: album
 
 # Exclude these files from your production _site
 exclude:
