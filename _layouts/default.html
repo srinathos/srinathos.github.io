@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.css">
 
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
@@ -50,14 +51,24 @@
     </div>
 
     {% include analytics.html %}
-    <script type="module">
-      import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.esm.min.js';
-      import PhotoSwipe        from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.min.js';
-    
+    <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.umd.min.js"></script>
+    <script>
       const lightbox = new PhotoSwipeLightbox({
         gallery: '#main',
         children: 'a:has(img)',
-        pswpModule: () => PhotoSwipe
+        pswpModule: PhotoSwipe,
+        bgOpacity: 0.9,
+        padding: { top: 20, bottom: 20, left: 20, right: 20 },
+        spacing: 0.1,
+        wheelToZoom: true,
+        pinchToClose: true,
+        closeOnVerticalDrag: true,
+        hideAnimationDuration: 200,
+        showAnimationDuration: 200,
+        zoomAnimationDuration: 200,
+        maxZoomLevel: 2,
+        preload: [1, 1]
       });
       lightbox.init();
     </script>

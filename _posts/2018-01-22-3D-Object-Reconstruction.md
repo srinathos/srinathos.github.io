@@ -44,7 +44,7 @@ To perform a 3D reconstruction, I'd require to capture how the object looks from
 ###  Depth Sensor
 The depth sensor used is the PrimeSense Carmine 1.09 sensor. This is a short-range sensor and uses structured light to paint the scene. Based on how the light appears distorted, the depth of the object is determined and a point cloud is generated.
 
-[![PrimeSense Carmine 1.09 Depth sensor](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/depth_sensor.png)](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/depth_sensor.png){: .halfwidth}
+[![PrimeSense Carmine 1.09 Depth sensor](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/depth_sensor.png)](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/depth_sensor.png)
 *PrimeSense Carmine 1.09 Depth sensor*
 
 ### Stereo Sensor
@@ -126,3 +126,5 @@ This shows how the algorithm fails. The house had many possible keypoints, yet i
 * While I got to calibrating the stereo setup, I had to keep it aside because of the timeline. It would be interesting to see the results from a stereo vision setup. 
 * The project captures clouds points from 8 angles. The results can be drastically improved by using more data from smaller angle intervals.
 * I would like to experiment with different outlier removal methods. The radius outlier removal tool looks like a good candidate.
+
+{% include photoswipe-js.html %}
