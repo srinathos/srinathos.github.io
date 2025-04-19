@@ -51,12 +51,13 @@
 
     {% include analytics.html %}
     <script type="module">
-      import PhotoSwipeLightbox from '/photoswipe/photoswipe-lightbox.esm.js';
+      import PhotoSwipeLightbox from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe-lightbox.esm.min.js';
+      import PhotoSwipe        from 'https://cdn.jsdelivr.net/npm/photoswipe@5/dist/photoswipe.esm.min.js';
     
       const lightbox = new PhotoSwipeLightbox({
-        gallery: '#main',          // container that wraps your post/album body
-        children: 'a:has(img)',    // only anchors with an <img> inside
-        pswpModule: () => import('/photoswipe/photoswipe.esm.js')
+        gallery: '#main',
+        children: 'a:has(img)',
+        pswpModule: () => PhotoSwipe
       });
       lightbox.init();
     </script>
