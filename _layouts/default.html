@@ -4,6 +4,7 @@
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
     {% include meta.html %}
+    {% include head.html %}
 
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,9 +30,9 @@
           <nav>
             <a href="{{ site.baseurl }}/">Blog</a>
             <a href="{{ site.baseurl }}/about">About</a>
+            <a href="{{ site.baseurl }}/galleries">Galleries</a>
             <a href="http://www.linkedin.com/in/srinathos/">LinkedIn</a>
             <a href="http://bitly.com/2lHaNnr">Resume</a>
-
           </nav>
         </header>
       </div>
