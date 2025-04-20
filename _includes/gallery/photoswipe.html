@@ -12,7 +12,6 @@
             <div class="pswp__top-bar">
                 <div class="pswp__counter"></div>
                 <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
                 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
                 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
                 <div class="pswp__preloader">
@@ -22,10 +21,6 @@
                       </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
             </div>
 
             <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
@@ -81,54 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return items;
         };
 
-        var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
-            var pswpElement = document.querySelectorAll('.pswp')[0],
-                gallery,
-                options,
-                items;
-
-            items = parseThumbnailElements(galleryElement);
-
-            options = {
-                galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-                getThumbBoundsFn: function(index) {
-                    var thumbnail = items[index].el.getElementsByTagName('img')[0],
-                        pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                        rect = thumbnail.getBoundingClientRect();
-
-                    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-                },
-                showAnimationDuration: disableAnimation ? 0 : 300,
-                hideAnimationDuration: 300
-            };
-
-            if(fromURL) {
-                if(options.galleryPIDs) {
-                    for(var j = 0; j < items.length; j++) {
-                        if(items[j].pid == index) {
-                            options.index = j;
-                            break;
-                        }
-                    }
-                } else {
-                    options.index = parseInt(index, 10) - 1;
-                }
-            } else {
-                options.index = parseInt(index);
-            }
-
-            if( isNaN(options.index) ) {
-                return;
-            }
-
-            gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-            gallery.init();
+        var closest = function closest(el, fn) {
+            return el && ( fn(el) ? el : closest(el.parentNode, fn) );
         };
 
-        function closest(el, fn) {
-            return el && ( fn(el) ? el : closest(el.parentNode, fn) );
-        }
-        
         var onThumbnailsClick = function(e) {
             e = e || window.event;
             e.preventDefault ? e.preventDefault() : e.returnValue = false;
@@ -162,13 +113,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if(index >= 0) {
-                openPhotoSwipe( index, clickedGallery );
+                openPhotoSwipe(index, clickedGallery);
             }
             return false;
         };
 
-        var galleryElements = document.querySelectorAll( gallerySelector );
+        var openPhotoSwipe = function(index, galleryElement, disableAnimation) {
+            var pswpElement = document.querySelectorAll('.pswp')[0],
+                gallery,
+                options,
+                items;
 
+            items = parseThumbnailElements(galleryElement);
+
+            options = {
+                galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+                getThumbBoundsFn: function(index) {
+                    var thumbnail = items[index].el.getElementsByTagName('img')[0],
+                        pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                        rect = thumbnail.getBoundingClientRect();
+
+                    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+                },
+                showAnimationDuration: disableAnimation ? 0 : 300,
+                hideAnimationDuration: 300,
+                shareEl: false,
+                shareButtons: [],
+                tapToClose: true,
+                clickToCloseNonZoomable: true
+            };
+
+            gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        };
+
+        var galleryElements = document.querySelectorAll(gallerySelector);
         for(var i = 0, l = galleryElements.length; i < l; i++) {
             galleryElements[i].setAttribute('data-pswp-uid', i+1);
             galleryElements[i].onclick = onThumbnailsClick;
