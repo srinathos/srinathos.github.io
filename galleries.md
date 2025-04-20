@@ -1,10 +1,8 @@
 ---
 layout: page
-title: Photo Galleries
 permalink: /galleries/
 ---
 
-Browse through my collection of photo galleries:
 
 <div class="gallery-list">
   {% assign gallery_posts = site.posts | where_exp: "post", "post.layout == 'gallery'" %}
