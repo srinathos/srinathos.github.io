@@ -4,7 +4,7 @@ title: Making radio interesting again
 date: 2019-05-1
 ---
 
-I sometimes feel lucky to have experienced this surge in technology while I grew up -- radio, cassettes, winamp, CDs, and now streaming. Looking back, radio was always fun to listen to, with some adverts peppered in between songs. After I had purchased my first car in 2017, I decided to give the radio a listen again. The advertisements were still there, and I found myself skipping through stations for most of the drive just to hear music. After 15 years, it felt as if there were a lot more ads. This experience resulted in me experimenting with ML to classify a streams into ads and music. 
+I sometimes feel lucky to have experienced this surge in technology while I grew up -- radio, cassettes, winamp, CDs, and now streaming. Looking back, radio was always fun to listen to, with some adverts peppered in between songs. After I had purchased my first car in 2017, I decided to give the radio a listen again. The advertisements were still there, and I found myself skipping through stations for most of the drive just to hear music. After 15 years, it felt as if nothing had changed, except that there were a lot more ads. What if I could have an program that automatically tunes to a station playing music? 
 
 ## Solution
 
