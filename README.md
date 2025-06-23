@@ -15,6 +15,8 @@ My current workflow for galleries --
 ## Credits
 
 - [Barry Clark](https://github.com/barryclark/jekyll-now) - Super quick setup, Thanks!
+---
+Original contributors
 - [Jekyll](https://github.com/jekyll/jekyll) - Thanks to its creators, contributors and maintainers.
 - [SVG icons](https://github.com/neilorangepeel/Free-Social-Icons) - Thanks, Neil Orange Peel. They're beautiful.
 - [Solarized Light Pygments](https://gist.github.com/edwardhotchkiss/2005058) - Thanks, Edward.
