@@ -1,4 +1,6 @@
 _site
+_ref
+gallery_output.txt
 .DS_Store
 .jekyll
 .jekyll-metadata
