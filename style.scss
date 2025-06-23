@@ -5,11 +5,8 @@
 // IMPORTS
 //
 
-@use "reset" as *;
-@use "variables" as *;
-@use "highlights" as *;
-@use "svg-icons" as *;
-
+@import "reset";
+@import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
@@ -286,18 +283,7 @@ footer {
   text-align: center;
 }
 
-// Additional styles for images
-/* --- custom overrides for images --- */
-.entry img,
-picture img {
-  max-width: 50%;
-  height: auto;
-  display: block;
-}
-
-/* optional half‑width helper */
-.halfwidth img {
-  max-width: 25%;
-  margin: 0 auto;
-}
-
+// Settled on moving the import of syntax highlighting to the bottom of the CSS
+// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
+@import "highlights";
+@import "svg-icons";
