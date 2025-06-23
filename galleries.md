@@ -3,7 +3,7 @@ layout: page
 permalink: /galleries/
 ---
 
-<p>Welcome to my photography collection! Here you'll find various galleries showcasing my work from different shoots and adventures. Click on any gallery below to explore the full collection. You can find more on my Instagram linked in the bottom of the page. </p>
+<p>Welcome to my photography collection! Here you'll find various galleries showcasing my work from different shoots and adventures. You can find more on my Instagram linked in the bottom of the page. </p>
 
 <div class="gallery-list">
   {% assign gallery_posts = site.posts | where_exp: "post", "post.layout == 'gallery'" %}
