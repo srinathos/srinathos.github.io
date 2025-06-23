@@ -76,7 +76,7 @@ sass: { style: expanded } # You might prefer to minify using :compressed
 plugins:                       # modern key name
   - jekyll-sitemap
   - jekyll-feed
-  - jekyll_picture_tag         # responsive <picture> tag
+  - jekyll-picture-tag         # responsive <picture> tag
   - jekyll-paginate-v2         # optional nicer pagination
 
 # ---------- Picture‑tag defaults ----------
