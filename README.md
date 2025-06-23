@@ -3,6 +3,15 @@
 
 Interesting that you chose to read this part instead of my blog. But anyway, the repo hosts my blog itself as I've used github pages. I used github pages for one of my earlier projects and its ease of use led me to make a blog on the same platform. I forked an initial setup from [Barry clark](https://github.com/barryclark/jekyll-now) and made changes to it.
 
+## Automated galley setup
+
+My current workflow for galleries -- 
+1) run create_gallery.sh 
+2) Setup source images under /images/gallery/gallery-name
+3) Run `bundle exec ruby gallery_helper.rb $GALLERY_DIR > gallery_output.txt`. This will generate metadata required by the gallery posting
+4) Copy generated YAML from gallery_output.txt to the front matter in gallery-name. See other gallery posts for examples
+
+
 ## Credits
 
 - [Barry Clark](https://github.com/barryclark/jekyll-now) - Super quick setup, Thanks!
