@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             items = parseThumbnailElements(galleryElement);
 
             options = {
+                index: index,
                 galleryUID: galleryElement.getAttribute('data-pswp-uid'),
                 getThumbBoundsFn: function(index) {
                     var thumbnail = items[index].el.getElementsByTagName('img')[0],
