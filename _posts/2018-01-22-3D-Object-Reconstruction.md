@@ -5,18 +5,18 @@ date: 2018-01-22
 ---
 
 ## Introduction
-This project aims to scan real-life objects and generate its 3D model in virtual reality. Using a depth sensor, and circling the object of interest, we can generate a point cloud for a set of angles while the corresponding texture/color map. After some cleaning, the individual point clouds are stitched to create a 3D model. The last step would be to render a mesh over the obtained points. As a constraint, this project may be limited to scanning objects with simple geometrical shapes and using sensors at fixed locations. I did this project as a part of my [Computational Geometery](https://cs.rit.edu/~rjb/RITcourses/2171/CompGeo/ComputationalGeometry.html) course taught by [Dr. Renold Bailey](https://cs.rit.edu/~rjb).
+This project experiments with scanning real-life objects and generating its 3D model in virtual reality. Using a depth sensor, and circling the object of interest, we can generate a point cloud for a set of angles while the corresponding texture/color map. After some cleaning, the individual point clouds are stitched to create a 3D model. The last step would be to render a mesh over the obtained points. As a constraint, this project may be limited to scanning objects with simple geometrical shapes and using sensors at fixed locations. I did this project as a part of my [Computational Geometery](https://cs.rit.edu/~rjb/RITcourses/2171/CompGeo/ComputationalGeometry.html) course taught by [Dr. Renold Bailey](https://cs.rit.edu/~rjb).
 
 ## Background information about the problem
 This project works with depth sensors, capturing point clouds and working on them. The general approach to such a problem would be to divide the project into subparts and develop them individually.
 
-* **Acquisition**: One can go into various methods of acquiring a depth map/point cloud of the object. Sensors can either be **fixed** in position or can be **moved around the object**. For the latter, one might require the position of the sensor in 3D space as well. Another decision one has to make is the **type of sensor**. Stereo-vision based cameras would have certain prerequisites steps while a depth sensor provides direct access to the depth field. This project works with a fixed position depth sensor and the object rotating on a turntable. 
+* **Acquisition**: The capture sensor can either be **fixed** in position or can be **moved around the object**. Depending on the scenario, you would either need to understand the pose of the sensor, or the object. Another decision one has to make is the **type of sensor**. Stereo-vision based cameras would specifically require extrinsics calibration to calculate depth, while a depth sensor typically is pre-calibrated and provides direct access to the depth field. This project works with a fixed position structured light sensor and an object rotating on a turntable. 
 
-* **Cleaning**: While cleaning as a step can either go into the Acquisition or Processing phase, I decided to keep it separate because of the different methods one can use. This step generally involved removing outliers or fitting points to a plane to help obtain an accurate 3D representation. This project uses a simple **Statistical Outlier Removal** filter to remove sensor noise.
+* **Cleaning**: While cleaning as a step can either go into the Acquisition or Processing phase, I decided to keep it separate because of the different methods one can use. This step generally involved removing outliers or fitting points to a plane to help obtain an accurate 3D representation. This project uses a simple **Statistical Outlier Removal** filter to remove noise in the point cloud.
 
-* **Point cloud processing**: This part of the program is where we see the object manifesting. A common approach to align two point clouds is to use the **Iterative Closest Points** algorithm. The goal is to align the two or more point clouds together and merge them into one. For the project, consecutive point clouds are stitched sequentially to form the 3D object. 
+* **Point cloud processing and alignment**: A common approach to align two point clouds is to use the **Iterative Closest Points** algorithm. The goal is to align the two or more point clouds together and merge them into one. For the project, consecutive point clouds are stitched sequentially to build the 3D object. 
 
-* **Surface rendering**: This is the final step that would give the object some detail and add realism to it. A common approach is to **Delaunay triangulation** of some type to generate a mesh of the object. This part of the project is still pending; I'm still working on perfecting the processing part.
+* **Surface rendering**: This is the final step that would give the object some detail and add realism to it. A common approach is to **Delaunay triangulation** of some type to generate a mesh of the object. This part of the project is pending.
 
 ## Inputs to and Outputs from the system
 As a whole, the input to the system is an object that will be scanned and the output would be a representative 3D model of it. But considering just the software components, the input is a set of point clouds and the output is a stitched point cloud representing the object scanned. 
@@ -47,17 +47,6 @@ The depth sensor used is the PrimeSense Carmine 1.09 sensor. This is a short-ran
 ![PrimeSense Carmine 1.09 Depth sensor](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/depth_sensor.png)
 *PrimeSense Carmine 1.09 Depth sensor*
 
-### Stereo Sensor
-I also wanted to experiment with point clouds generated by a stereo setup. Getting point clouds using a depth sensor is pretty straightforward; Using PCL to obtain the point cloud directly. But with stereo sensors, the captured images first have to undergo rectification. The disparity map/estimated point cloud will be calculated after that. A successful disparity map depends on various camera rig parameters. I started building a stereo rig for the purpose and used 2 Logitech c270 cameras. I even picked up a dual camera mount and with the help of a few friends from the [College of Engineering's](https://www.rit.edu/kgcoe/) machine shop, got the cameras securely mounted. 
-
-![Stereo cameras mounted on the dual camera mount](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/stereo_camera_mount.jpg)
-*Stereo cameras mounted on the dual camera mount*
-
-The mount easily sits on a tripod and can have a wide variety of adjustments. As things went forward, I had to cut down on certain parts to complete the project for the course. The stereo part of the project is something I'm yet to experiment with.
-
-![Final Stereo camera setup](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/stereo_steup_used.jpg)
-*Final Stereo camera setup*
-
 ### Turntable
 To capture the object from every angle, I placed a turntable on a flat surface with angles marked at intervals of 45 degrees. The object would be placed at the center and rotated around its vertical axis.  
 
@@ -69,24 +58,22 @@ To capture the object from every angle, I placed a turntable on a flat surface w
 *Turntable angles*
 
 ## Software
-In the next few paragraphs, I'll explain the various software components I've used to capture data, clean the points clouds, stitch and display them. For manual edits, viewing and other functions I used the open-source [CloudCompare](http://www.danielgm.net/cc/) tool. The [Point Cloud Library (PCL)]() was used in conjunction with the middleware and the Primesense drivers to capture and process the points. A separate section, in the end, will discuss how I set up the development environment for this project.
-
-Let's have a look at the software components that contribute to various parts of the system.
+For manual edits, viewing and other functions I used the open-source [CloudCompare](http://www.danielgm.net/cc/) tool. The [Point Cloud Library (PCL)]() was used in conjunction with the middleware and the Primesense drivers to capture and process the points. 
 
 ### Acquisition
 The OpenNI middleware and Primesense drivers help in identifying and communicating with the Primesense sensor. Point cloud data can be directly acquired by setting a particular flag variable while instantiating the camera. The point cloud once acquired, is written to the local disk in the .pcd format that PCL uses. The program was adapted from a [few](http://pointclouds.org/documentation/tutorials/openni_grabber.php#openni-grabber) [examples](http://pointclouds.org/documentation/tutorials/writing_pcd.php#writing-pcd) on the PCL website. 
 
 ### Cleaning
-Any sensor is susceptible to some noise from the environment. While the depth sensor accurately obtains the depth from the scene, we can observe some noise around the objects. I used the Statistical Outlier Removal method to remove these points. While the result was not all that great, it was better than the initial input.
+Any sensor is susceptible to some noise from the environment. While the structured light sensor accurately obtains the depth from the scene, we can observe some noise around the objects. I used the Statistical Outlier Removal method to remove these points. While the result was not ideal, it was better than the initial input.
 
 ![Image stitched without any cleaning, notice how the point clouds were misaligned](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/house.gif)
 
 *Image stitched without any cleaning, notice how the point clouds were misaligned*
 
-As the sensor could only be tilted upwards,  I had to mount it upside down to the base of the table. This resulted in my cloud points being visualized upside down. An easy fix was to use a negative Y value to flip the axis using ```setCameraPosition``` while using the PCLVisualizer.
+As the sensor could only be tilted upwards in my setup,  I had to mount it upside down to the base of the table. This resulted in my cloud points being visualized upside down. An easy fix was to use a negative Y value to flip the axis using ```setCameraPosition``` while using the PCLVisualizer.
 
 ### Stitching
-This is the core part of the program. Each point cloud has captured a part of the object; we stitch them sequentially to obtain a 3D reconstruction. I've used the Iterative Closest Points (ICP) algorithm to stitch adjacent cloud points. The whole process is termed as [Registration](http://pointclouds.org/documentation/tutorials/registration_api.php). Given below is a high-level outline of how the algorithm works:
+I stitch each captured point cloud sequentially to obtain a 3D reconstruction using the Iterative Closest Points (ICP) algorithm. This process is termed as point cloud [Registration](http://pointclouds.org/documentation/tutorials/registration_api.php). Here is a high-level outline of how the algorithm works:
 * Iterate until error/difference is within the threshold limit.
   * Identify keypoints and compute its descriptors
   * Identify mutual keypoints across point clouds and register them as pairs
@@ -94,15 +81,15 @@ This is the core part of the program. Each point cloud has captured a part of th
   * Perform the transformation and compute the error/difference.
   
 ## Testing and Results
-While I did try many objects with the setup, I'm going to discuss three main candidates, a Rubik's cube, a box of Ritz crackers, and a model of a house. 
+Here are three objects I used to test the setup -- a Rubik's cube, a box of Ritz crackers, and a model of a house. 
 
 * The cube has a simple geometric structure, different colors, and various corners. All of this would be ideal while the algorithm searches for keypoints. The only challenge would be to reproduce the crevices between blocks. This object would be a great candidate for the stereo vision setup.    
 ![Rubik's cube](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/cube.png)
 
-* The box was chosen because of its simple geometric shape along with a rich amount of features in the form of graphics. This would be the easiest to reproduce. 
+* The box was chosen because of its simple geometric shape along with a rich amount of features in the form of graphics. This should be the easiest to reproduce. 
 ![Box](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/box.png)
 
-* The house was a more complex object. While it did have many corners, the complex geometry could be hard to reproduce.
+* The house was a more complex object. While it did have many corners, the complex geometry might be hard to reproduce.
 ![House](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/house.jpg)
 
 ### Rubik's cube
@@ -116,13 +103,22 @@ The box has been reproduced the best amongst them all. While there are slight mi
 ![3D reconstruction of the box](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/box.gif)
 
 ### House
-This shows how the algorithm fails. The house had many possible keypoints, yet it did fail. This is because of the nature of the ICP algorithm; the algorithm works well when the two-point clouds are coarsely pre-aligned. This way, it does not match spurious keypoints and incorrectly align them, which is precisely what happened here. Moreover, for this particular model, I did not perform the cleaning step, which also contributed to the misalignments of clouds; This shows us how important it is to remove outliers before stitching clouds.
+This shows how the algorithm fails. The house had many possible keypoints, yet it did fail. This is because of the nature of the ICP algorithm; the algorithm works well when the two-point clouds are coarsely pre-aligned and when the correct keypoints are matched. However, there were some incorrect matches, hence the result. 
 
 ![3D reconstruction of the house](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/house.gif) 
+
+## Stereo Sensor
+I also wanted to experiment with point clouds generated by a stereo setup. Getting point clouds using a structured light sensor is pretty straightforward; Using PCL to obtain the point cloud directly. But with stereo camera sensors, the camera rig must first undergo stereo calibration i.e. understanding the relationship between the two cameras in 3D space. The captured images then have to be rectified. Then, using the the baseline of the camera, a disparity map will be calculated which can be inverted to produce [depth](https://en.wikipedia.org/wiki/Binocular_disparity). I started building a stereo rig for the purpose and used 2 Logitech c270 cameras. I even picked up a dual camera mount and with the help of a few friends from the [College of Engineering's](https://www.rit.edu/kgcoe/) machine shop, got the cameras securely mountedthen have to be rectified cThen, using the the baseline of the  , the dual camera which can be inverted to https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/stereo_camera_mount.jpg)
+*Stereo cameras mounted on the dual camera mount*
+
+The mount easily sits on a tripod and can have a wide variety of adjustments. Unfortunately, I had to reduce scope in order to ship. 
+
+![Final Stereo camera setup](https://raw.githubusercontent.com/srinathos/website-images/master/3DReconstruction/images/stereo_steup_used.jpg)
+*Final Stereo camera setup*
 
 ## Future work
 
 * This particular implementation looks for keypoints on the object and stitches the clouds. A better approach would be to have robust keypoints on the turntable itself and transform/merge the clouds solely on those kepoints. This would avoid issues with smooth objects or objects with a lack of keypoints.
-* While I got to calibrating the stereo setup, I had to keep it aside because of the timeline. It would be interesting to see the results from a stereo vision setup. 
-* The project captures clouds points from 8 angles. The results can be drastically improved by using more data from smaller angle intervals.
-* I would like to experiment with different outlier removal methods. The radius outlier removal tool looks like a good candidate.
+* Stereo vs structured light 
+* The project captures clouds points from 8 angles. We should get better results and higher fidelity by capturing more angles.
+* Experimenting with different outlier removal methods. The radius outlier removal tool looks like a good candidate.

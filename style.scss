@@ -5,8 +5,10 @@
 // IMPORTS
 //
 
-@import "reset";
-@import "variables";
+@use "reset" as *;
+@use "variables" as *;
+@use "highlights" as *;
+@use "svg-icons" as *;
 // Syntax highlighting @import is at the bottom of this file
 
 /**************/
@@ -285,5 +287,38 @@ footer {
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
-@import "highlights";
-@import "svg-icons";
+
+
+/*********************/
+/* INLINE IMAGES     */
+/*********************/
+
+.inline-image {
+  margin: 2em 0;
+  max-width: 100%;
+  
+  img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  figcaption {
+    text-align: center;
+    font-style: italic;
+    color: $gray;
+    margin-top: 1em;
+  }
+}
+
+// For gallery posts with inline images
+.post.gallery {
+  .inline-image {
+    margin: 3em auto;
+    max-width: 800px;  // Limit maximum width for very large screens
+    
+    @include mobile {
+      margin: 2em auto;
+    }
+  }
+}
