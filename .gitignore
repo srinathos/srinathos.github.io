@@ -6,7 +6,5 @@ gallery_output.txt
 .jekyll-metadata
 .bundle
 .sass-cache
-Gemfile
-Gemfile.lock
 node_modules
 package.json
