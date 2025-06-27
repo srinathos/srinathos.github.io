@@ -284,6 +284,14 @@ In reality however, deep learning solutions provide significant robustness and a
 
 ## What's next? 
 
-Clearly, our problem is bigger than just generating a series of point clouds. Additionally, in the field, we will have to estimate and track our motion over time, i.e, 3D understanding of the scene and estimate our position. This problem statement is commonly fulfilled by Visual odometry (VO) and SLAM (Simultaneous Localization And Mapping) pipelines. VO estimates incremental changes in camera pose purely from image sequences. When we feed these 3D observations into a backend routine that optimizes multiple observations and handles location revisits(loop closures), we get a SLAM solution. Modern systems use a combination of sensors for odometry (LiDAR, IMUs, cameras) feed observations into a factor graph or Kalman Filter based backend to generate a global map over time.   
+Clearly, our problem is bigger than just generating a series of point clouds. Additionally, in the field, we will have to estimate and track our motion over time, i.e, 3D understanding of the scene and estimate our position. This particular problem of understanding the state of a vehicle (or robot) in a scene appears in multiple scenarios and is called <i>State Estimation</i>. Using a sequence of sensor measurements and a prior state, we can estimate the current state of a vehicle.
 
-In the next part of this series, we'll focus on buiding an odometry system for perception at the end. Specifically, we'll be building a Visual Inertial Odometry system with a factor graph backend for pose estimation. 
+Using a set of cameras, we can perform state estimation using Visual Odometry (VO). Additionally, we can optimize the generated map by using a backend optimization to handle location revisits (also called loop closures). Modern systems use a combination of sensors for odometry (LiDAR, IMUs, cameras) feed observations into a factor graph or Kalman Filter based backend to generate a global map over time.
+
+In the next part of this series, we'll focus on buiding an odometry system for perception at the end. Specifically, we'll be building a Visual Odometry system with a factor graph backend for pose estimation.
+
+### References
+
+Here are some reference I found (and you might find) useful on the topic -- 
+- [State Estimation for Robotics](http://asrl.utias.utoronto.ca/~tdb/bib/barfoot_ser17.pdf)
+- [Stereo vision theory](https://johnwlambert.github.io/stereo/) 
