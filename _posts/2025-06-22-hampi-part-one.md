@@ -7,7 +7,7 @@ images:
     thumbnail: /images/gallery/hampi-p0/DSC4218-thumb.png
     width: 854
     height: 1280
-    caption:  "Many take a bath in the river along with a visit to the adjoining 7th century Virupaksha Temple. Here are some kids part of a school excursion. Tungabhadra banks, India, 2022"
+    caption:  "Many take a bath in the river along with a visit to the adjoining 7th century Virupaksha Temple. Here are some kids who were part of a school excursion. Tungabhadra banks, India, 2022"
     alt:  tungha-bliss
   - full: /images/gallery/hampi-p0/DSC4360.png
     thumbnail: /images/gallery/hampi-p0/DSC4360-thumb.png
@@ -93,7 +93,7 @@ images:
  
 Hampi was my first serious photography trip. This small Indian village, now home to ~3000 people, was once a bustling city of half a million. This UNESCO World Heritage site holds legacies and stories stretching back to the 14th century, when it thrived as a major population center. Today, a large area is marked for preservation, while extended regions have restrictions on development. Everything in this region, including the people, flows around the boulder-filled landscape, these rock formations that seem permanent but shift over thousands of years. 
 
-In the age of AI tech transforming job markets, it is incredible to observe a life undisturbed and so closely intertwined with nature. Here are some photos I captured during my two trips to the area while mentoring with [Indrajit Khambe](https://www.indrajitkhambe.com/about); special thanks for his guidance! The serenity of such places is unmatched and I will be returning soon.
+In the age of AI tech transforming job markets, it is incredible to observe a life undisturbed and so closely intertwined with nature. Here are some photos I captured during my trips to the area while learning from [Indrajit Khambe](https://www.indrajitkhambe.com/about); special thanks for his guidance! The serenity of such a place is unmatched and I will be returning soon.
 
 <figure class="inline-image">
   <img src="/images/gallery/hampi-p0/DSC4356.png" alt="tungha-banks" />
